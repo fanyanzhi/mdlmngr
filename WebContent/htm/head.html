@@ -1,0 +1,23 @@
+<div id="head">
+<c:if test="${LoginObj.role!='3'}">
+		<div class="headleft" title="CAJViewer云阅读管理系统">CAJViewer云阅读管理系统</div>
+		</c:if>
+		<c:if test="${LoginObj.role=='3'}">
+		<div class="jgheadleft" title="机构数字图书馆"><img src="images/jgtopbanner.jpg" /></div>
+		</c:if> 
+		<dl class="headright">
+			<dt>
+				<img src="images/person.png" />
+			</dt>
+			<dd>
+				<p>
+					<em>${LoginObj.userName}</em>系统管理员
+				</p>
+				<p>
+					<input name="" onclick="window.location.href='LoginOut';" class="lout" type="button" value="退出" />
+				</p>
+			</dd>
+		</dl>
+		<div class="clear"></div>
+		<div id="divShow" class="loading" style="display: none;"></div>
+	</div>

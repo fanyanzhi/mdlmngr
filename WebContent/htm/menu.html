@@ -1,0 +1,330 @@
+<div id="mdlleft">
+	<dl class="list">
+		<c:if test="${LoginObj.role=='1'}">
+			<dt id="menu01" class="current" onclick="setMenu(this.id)">
+				<a class="direA" href="UserList.do?curmenu=01">用户管理</a>
+			</dt>
+			<dt id="menu02" onclick="setMenu(this.id)">
+				<a class="direB" href="ModuleList.do?curmenu=02">模块管理</a>
+			</dt>
+		</c:if>
+		<c:if test="${LoginObj.role=='2'}">
+			<dt id="menu01" class="current">
+				<a class="direD" href="javascript:void(0);" onclick="return foldMenu(this)">用户管理</a>
+			</dt>
+			<dd id="ddMenu01">
+				<p id="menu011" class="current" onclick="setMenu(this.id)">
+					<a href="LoginLogList.do?curmenu=011" class="onlogin">用户信息</a>
+				</p>
+				<p id="menu012" onclick="setMenu(this.id)">
+					<a href="OnlineUserList.do?curmenu=012" class="online">在线用户</a>
+				</p>
+				<p id="menu013" onclick="setMenu(this.id)">
+					<a href="StatisticAnalysis.do?curmenu=013" class="analysis">统计分析</a>
+				</p>
+				<p id="menu014" onclick="setMenu(this.id)">
+					<a href="FunctionInfo.do?curmenu=014" class="functionUse">功能使用统计</a>
+				</p>
+			</dd>
+			<c:set var="ModuleList" value="${sessionScope.ModuleMenu}" />
+			<c:set var="ModuleTypeList" value="${sessionScope.ModuleTypeMenu}" />
+			<c:if test="${ModuleList!=null}">
+				<c:forEach items="${ModuleList}" var="item">					
+					<c:set var="TypeList" value="${ModuleTypeList[item.key]}" />
+					<c:if test="${TypeList!=null}">
+					<dt id="menu${item.key}" onclick="setMenu(this.id)">
+						<a class="direB" href="javascript:void(0);" onclick="return foldMenu(this)" >${item.value}</a>
+					</dt>
+							<dd id="ddmenu${item.key}" class="addlist">
+								<c:forEach items="${TypeList}" var="typeitem">
+									<p id="menu${item.key}_${typeitem.key}" onclick="setMenu(this.id)">
+										<a href="UserModuleContentList.do?mid=${item.key}&tid=${typeitem.key}&curmenu=${item.key}_${typeitem.key}">${typeitem.value}</a>
+									</p>
+								</c:forEach>
+							</dd>							
+					</c:if>	
+					<c:if test="${TypeList==null}">
+					<dt id="menu${item.key}" onclick="setMenu(this.id)">
+						<a class="direB" href="UserModuleContentList.do?mid=${item.key}&curmenu=${item.key}">${item.value}</a>
+					</dt>
+					</c:if>	
+				</c:forEach>
+			</c:if>
+			<dt id="menu02" onclick="setMenu(this.id)">
+				<a class="direE" href="RecommendList.do?curmenu=02">精品推荐</a>
+			</dt>
+			<!-- <dt id="menu03" onclick="setMenu(this.id)">
+				<a class="direJ" href="UploadFileList.do?curmenu=03">上传文件管理</a>
+			</dt> -->
+			<dt id="menu04" onclick="setMenu(this.id)">
+				<a class="direF" href="DownloadFileList.do?curmenu=04">下载管理</a>
+			</dt>
+			<dt id="menu05" onclick="setMenu(this.id)">
+				<a class="direK" href="NoticeList.do?curmenu=05">发布通知</a>
+			</dt>
+			<dt id="menu14" onclick="setMenu(this.id)">
+				<a class="direQ" href="AdvertisementList.do?curmenu=14">发布广告</a>
+			</dt>
+			<dt id="menu07" onclick="setMenu(this.id)">
+				<a class="direL" href="RecommendImage.do?curmenu=07&curtype=2">图片通告</a>
+			</dt>
+			<dt id="menu08" onclick="setMenu(this.id)">
+				<a class="direM" href="VersionList.do?curmenu=08">版本管理</a>
+			</dt>
+			<dt id="menu09" onclick="setMenu(this.id)">
+				<a class="direN" href="TerminalNumList.do?curmenu=09">终端数管理</a>
+			</dt>
+			<dt id="menu10" onclick="setMenu(this.id)">
+				<a class="direP" href="EpubServerList.do?curmenu=10">Epub服务监控</a>
+			</dt>
+			<dt id="menu11">
+				<a class="direO" href="javascript:void(0);" onclick="return foldMenu(this)">评论管理</a>
+			</dt>
+			<dd id="ddMenu11">
+			<p id="menu111" onclick="setMenu(this.id)">
+				<a href="ArticlePraise.do?curmenu=111" class="good">文章推荐</a>
+			</p>
+			<p id="menu112" onclick="setMenu(this.id)">
+				<a href="CommentList.do?curmenu=112" class="plgl">评论管理</a>
+			</p>
+			<p id="menu113" onclick="setMenu(this.id)">
+				<a href="CommentSortControl.do?curmenu=113" class="plkz" >评理控制</a>
+			</p>
+ 			</dd>
+ 			<dt id="menu23">
+				<a class="direO" href="javascript:void(0);" onclick="return foldMenu(this)">关注管理</a>
+			</dt>
+			<dd id="ddMenu23">
+			<p id="menu231" onclick="setMenu(this.id)">
+				<a href="AtionKuaiBaoList.do?curmenu=231" class="good">快报管理</a>
+			</p>
+			<p id="menu232" onclick="setMenu(this.id)">
+				<a href="AtionXueKeList.do?curmenu=232" class="plgl">学科管理</a>
+			</p>
+			<p id="menu233" onclick="setMenu(this.id)">
+				<a href="AtionMeetingList.do?curmenu=233" class="plkz" >会议控制</a>
+			</p>
+			<p id="menu234" onclick="setMenu(this.id)">
+				<a href="AtionProjectList.do?curmenu=234" class="plkz" >工程控制</a>
+			</p>
+			<p id="menu235" onclick="setMenu(this.id)">
+				<a href="AtionChuBanWuList.do?curmenu=235" class="plkz" >期刊控制</a>
+			</p>
+			<p id="menu236" onclick="setMenu(this.id)">
+				<a href="AtionScholarList.do" class="plkz" >作者关注管理</a>
+			</p>
+			<p id="menu237" onclick="setMenu(this.id)">
+				<a href="AtionSeachFormalList.do" class="plkz" >检索式管理</a>
+			</p>
+ 			</dd>
+ 			   
+ 			<dt id="menu12" onclick="setMenu(this.id)">
+				<a class="direR" href="EpubTransServerList.do?curmenu=12">OData文件管理</a>
+			</dt>
+			<dt id="menu25" onclick="setMenu(this.id)">
+				<a class="direM" href="OrgInformation.do?curmenu=25">机构信息</a>
+			</dt>
+			<dt id="menu32" onclick="setMenu(this.id)">
+				<a class="direM" href="OrgHomePageList.do?curmenu=32">机构首页管理</a>
+			</dt>
+			<dt id="menu26" onclick="setMenu(this.id)">
+				<a class="direM" href="UserInformation.do?curmenu=26">用户资料</a>
+			</dt>
+			<dt id="menu36" onclick="setMenu(this.id)">
+				<a class="direS" href="UserSign.do?curmenu=36">签到记录</a>
+			</dt>
+			<dt id="menu13" onclick="setMenu(this.id)">
+				<a class="direS" href="UserFeeServerList.do?curmenu=13">收费记录</a>
+			</dt>
+			<dt id="menu24" onclick="setMenu(this.id)">
+				<a class="direS" href="RechargeListServlet.do?curmenu=24">充值记录</a>
+			</dt>
+			<dt id="menu31" onclick="setMenu(this.id)">
+				<a class="direM" href="SubjectList.do">主题推荐</a>
+			</dt> 
+			<dt id="menu33">
+				<a class="direO" href="javascript:void(0);" onclick="return foldMenu(this)">审核管理</a>
+			</dt>
+			<dd id="ddMenu33">
+			<p id="menu331" onclick="setMenu(this.id)">
+				<a href="OrgrelevanceSet.do?curmenu=331" class="good">审核设置</a>
+			</p>
+			<p id="menu332" onclick="setMenu(this.id)">
+				<a href="OrgrelevanceWaiting.do?curmenu=332" class="good">审核申请</a>
+			</p>
+			<p id="menu333" onclick="setMenu(this.id)">
+				<a href="OrgrelevanceList.do?curmenu=333" class="good">关联记录</a>
+			</p>
+ 			</dd>
+ 			<dt id="menu40">
+			<a class="direO" href="javascript:void(0);" onclick="return foldMenu(this)">申诉与认证</a>
+		</dt>
+		<dd id="ddMenu40">
+		<p id="menu401" onclick="setMenu(this.id)">
+			<a href="AppealList.do?curmenu=401" class="good">申诉管理</a>
+		</p>
+		<p id="menu402" onclick="setMenu(this.id)">
+			<a href="IdentityAuthList.do?curmenu=402" class="good">身份认证</a>
+		</p>
+		<p id="menu403" onclick="setMenu(this.id)">
+			<a href="ClaimList.do?curmenu=403" class="good">认领列表</a>
+		</p>
+			</dd> 
+			<dt id="menu38" onclick="setMenu(this.id)">
+			<a class="direC" href="PushTest.do?curmenu=38">推送测试</a>
+		</dt> 
+		</c:if>
+		<c:if test="${LoginObj.role=='1'}">
+			<dt id="menu03" onclick="setMenu(this.id)">
+				<a class="direG" href="SourceTypeList.do?curmenu=03">资源管理</a>
+			</dt>
+			<dt id="menu04" onclick="setMenu(this.id)">
+				<a class="direE" href="RecommendTypeOrder.do?curmenu=04">精品推荐</a>
+			</dt>
+			<dt id="menu05" onclick="setMenu(this.id)">
+				<a class="direH" href="SysConfigList.do?curmenu=05">系统设置</a>
+			</dt>
+			<dt id="menu15" onclick="setMenu(this.id)">
+				<a class="direU" href="CnkiFileList.do?curmenu=15">Cnki原文处理</a>
+			</dt>
+			<dt id="menu14" onclick="setMenu(this.id)">
+				<a class="direT" href="ErrorCnkiFile.do?curmenu=14">Cnki原文错误</a>
+			</dt>
+			<dt>
+				<a class="direI" href="Exception.do" target="_blank">错误信息查看</a>
+			</dt>
+			<dt id="menu16" onclick="setMenu(this.id)">
+				<a class="direQ" href="Crash.do?curmenu=16">崩溃信息查看</a>
+			</dt>
+			<dt id="menu17" onclick="setMenu(this.id)">
+				<a class="direP" href="PcMonitor.do?curmenu=17">服务器信息</a>
+			</dt>
+			<dt id="menu18" onclick="setMenu(this.id)">
+				<a class="direE" href="UploadBehindFile.do?curmenu=18">上传文件</a>
+			</dt>
+			<dt id="menu19" onclick="setMenu(this.id)">
+				<a class="direN" href="AppList.do?curmenu=19">App管理</a>
+			</dt>
+		</c:if>
+		<c:if test="${LoginObj.role=='3'}">
+			<dt id="menu011" onclick="setMenu(this.id)">
+				<a class="direD" href="LoginLogList.do?curmenu=011" class="onlogin">用户信息</a>
+			</dt>
+			<dt id="menu07" onclick="setMenu(this.id)">
+				<a class="direL" href="RecommendImage.do?curmenu=07&curtype=2">启动画面</a>
+			</dt>
+			
+			<dt id="menu14" onclick="setMenu(this.id)">
+				<!-- <a class="direQ" href="OrgImageList.do?curmenu=20">动态发布</a> -->
+				<a class="direQ" href="AdvertisementList.do?curmenu=14">动态发布</a>
+			</dt>
+			<dt id="menu02" onclick="setMenu(this.id)">
+				<a class="direE" href="RecommendList.do?curmenu=02">精品推荐</a>
+			</dt>
+			<dt id="menu22" onclick="setMenu(this.id)">
+				<a class="direO" href="HotwordList.do?curmenu=22">热词设置</a>
+			</dt>
+			<dt id="menu04" onclick="setMenu(this.id)">
+				<a class="direF" href="DownloadFileList.do?curmenu=04">下载管理</a>
+			</dt>
+		</c:if>
+		<dt id="menu21" onclick="setMenu(this.id)">
+			<a class="direC" href="RegistUserList.do?curmenu=21">注册用户</a>
+		</dt>
+		<dt id="menu06" onclick="setMenu(this.id)">
+			<a class="direC" href="UpdatePwd.do?curmenu=06">修改密码</a>
+		</dt>
+		
+	</dl>
+</div>
+<!--提示框-->
+<div id="popalert" class="popalert" style="display: none;">
+	<a href="javascript:void(0);" onclick="$('#popalert').css('display','none');" class="closealert" title="关闭"></a>
+	<p class="susess">成功class=fail</p>
+</div>
+<script type="text/javascript">
+	$(function() {
+		var vcurmenu = getPar("curmenu");
+		if (!vcurmenu) { //没有
+			vcurmenu = getCookie("curpage");
+		} else { //有
+			vcurmenu = "menu" + vcurmenu;
+			setCookie("curpage", vcurmenu);
+		}
+		$("#mdlleft").find("dt").each(function() {
+			$(this).attr("class", "");
+			if (this.id == unescape(vcurmenu)) {
+				$(this).attr("class", "current");
+			}
+		});
+		$("#mdlleft").find("p").each(function() {
+			$(this).attr("class", "");
+			if (this.id == unescape(vcurmenu)) {
+				$(this).attr("class", "current");
+			}
+		});
+		if ($("#mdlleft").find(".current").parent()[0].tagName.toLowerCase() != "dl") {
+			if ($("#mdlleft").find(".current").parent().prev()[0].tagName.toLowerCase() == "dt") {
+				$("#mdlleft").find(".current").parent().prev().attr("class", "current");
+			}
+		}
+
+		var varMenuStatus = getCookie("menustatus");
+		varMenuStatus = unescape(varMenuStatus);
+		var arrMenuStatus = varMenuStatus.split("$");
+		var varScrollTop = arrMenuStatus[1];
+		if (arrMenuStatus[0].length > 0) {
+			arrMenuStatus = arrMenuStatus[0].split(";");
+			var arrStatusTemp;
+			for ( var i = 0; i < arrMenuStatus.length; i++) {
+				arrStatusTemp = arrMenuStatus[i].split(":");
+				if (arrStatusTemp[1] == "0") {
+					$("#" + arrStatusTemp[0]).hide();
+				} else {
+					$("#" + arrStatusTemp[0]).show();
+				}
+			}
+		}
+		$("#mdlleft").scrollTop(varScrollTop);
+	});
+	function foldMenu(obj) {
+		$(obj).parent().next().toggle();
+		return false;
+	}
+
+	function setMenu(objval) {
+		//setCookie("curpage",obj.id+":"+$(obj).children("a")[0].href);
+		var varDDStatus = "";
+		$("#mdlleft").find("dd").each(function() {
+			if ($(this).is(":hidden")) {
+				varDDStatus += this.id + ":0;";
+			} else {
+				varDDStatus += this.id + ":1;";
+			}
+		});
+		if (varDDStatus.length != 0) {
+			varDDStatus = varDDStatus.substring(0, varDDStatus.length - 1);
+		}
+		setCookie("menustatus", varDDStatus + "$" + $("#mdlleft").scrollTop());
+		setCookie("curpage", objval);
+		return false;
+	}
+
+	function getPar(par) {
+		//获取当前URL
+		var local_url = document.location.href;
+		//获取要取得的get参数位置
+		var get = local_url.indexOf(par + "=");
+		if (get == -1) {
+			return false;
+		}
+		//截取字符串
+		var get_par = local_url.slice(par.length + get + 1);
+		//判断截取后的字符串是否还有其他get参数
+		var nextPar = get_par.indexOf("&");
+		if (nextPar != -1) {
+			get_par = get_par.slice(0, nextPar);
+		}
+		return get_par;
+	}
+</script>
